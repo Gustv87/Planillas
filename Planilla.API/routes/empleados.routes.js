@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const empleado = require('../controllers/empleados.controller');
+const empleado = require('../app/controllers/empleados.controller');
 
 router.get('/', empleado.getEmpleados);
 router.post('/', empleado.postEmpleado);

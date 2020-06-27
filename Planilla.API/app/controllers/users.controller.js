@@ -1,7 +1,9 @@
 // Cargamos el modelo
 const userModel = require('../models/users');
+
 // Cargamos el módulo de bcrypt
 const bcrypt = require('bcrypt');
+
 // Cargamos el módulo de jsonwebtoken
 const jwt = require('jsonwebtoken');
 
@@ -9,7 +11,7 @@ const jwt = require('jsonwebtoken');
 module.exports = {
     create: function (req, res, next) {
 
-        userModel.create({ nombre: req.body.nombre, email: req.body.email, password: req.body.password }, function (err, result) {
+        userModel.post({ nombre: req.body.nombre, email: req.body.email, password: req.body.password }, function (err, result) {
             if (err)
                 next(err);
             else

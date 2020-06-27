@@ -19,7 +19,7 @@ app.use(logger('dev'));
 
 // rutas
 
-app.use('/api/empleados', require('./routes/em'));
+app.use('/api/empleados', require('./routes/empleados.routes'));
 app.use('/api/empresas', require('./routes/empresas.routes'));
 app.use('/api/users', require('./routes/users.routes'))
 //fin de las rutas
