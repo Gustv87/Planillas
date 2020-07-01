@@ -11,7 +11,7 @@ const jwt = require('jsonwebtoken');
 module.exports = {
     create: function (req, res, next) {
 
-        userModel.post({ nombre: req.body.nombre, email: req.body.email, password: req.body.password }, function (err, result) {
+        userModel.create({ nombre: req.body.nombre, email: req.body.email, password: req.body.password }, function (err, result) {
             if (err)
                 next(err);
             else

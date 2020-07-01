@@ -6,8 +6,14 @@ const cors = require('cors');
 const logger = require('morgan');
 const empresas = require('./app/models/empresas');
 const empleados = require('./app/models/empleados');
+const mongoose = require('./config/database'); //Importando la configuracion de conexion a la BD
+var jwt = require('jsonwebtoken');
 
 // fin de dependencias de node
+
+// Conectando a la base de datos de Mongo
+mongoose.connection.on('error', console.error.bind(console, 'Error de conexion en MongoDB'));
+
 
 
 // inicio de middlewares
@@ -15,6 +21,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 app.use(bodyParser.json());
 app.use(logger('dev'));
+app.set('secretKey', 'ClaveSecreta'); // Clave Secreta para nuestro JWT
 // fin de middlewares
 
 // rutas
@@ -25,12 +32,12 @@ app.use('/api/users', require('./routes/users.routes'))
 //fin de las rutas
 
 // Rutas privadas que solo pueden ser consumidas con un token generado
-app.use('/api/empresas', validateUser, empresas);
-app.use('/api/empleados', validateUser, empleados);
-app.get('/favicon.ico', function (req, res) {
-    res.sendStatus(204);
+// app.use('/api/empresas', validateUser, empresas);
+// app.use('/api/empleados', validateUser, empleados);
+// app.get('/favicon.ico', function (req, res) {
+//     res.sendStatus(204);
 
-});
+// });
 
 // Para acceder a las rutas de empresas hemos definido middleware para validar al usuario.
 function validateUser(req, res, next) {

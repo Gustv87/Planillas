@@ -15,19 +15,23 @@ module.exports = {
     },
 
     //Metodo para retornar todos los videojuegos registrados en la base de datos
-    getAll: function (req, res, next) {
-        let empresasList = [];
-        empresaModel.find({}, function (err, empresas) {
-            if (err) {
-                next(err);
-            } else {
-                for (let empresa of empresas) {
-                    empresasList.push({ id: empresa._id, nombre: empresa.direccion, rtn: empresa.rtn });
-                }
-                res.json({ status: "success", message: "Empresas list found!!!", data: { empresas: empresasList } });
+    // getAll: function (req, res, next) {
+    //     let empresasList = [];
+    //     empresaModel.find({}, function (err, empresas) {
+    //         if (err) {
+    //             next(err);
+    //         } else {
+    //             for (let empresa of empresas) {
+    //                 empresasList.push({ id: empresa._id, nombre: empresa.direccion, rtn: empresa.rtn });
+    //             }
+    //             res.json({ status: "success", message: "Empresas list found!!!", data: { empresas: empresasList } });
 
-            }
-        });
+    //         }
+    //     });
+    // },
+    getEmpresa : async (req, res) => {
+        const empresas = await empresa.find();
+        res.json(empresa);
     },
     //Metodo para actualizar algun registro de la base de datos por ID
     updateById: function (req, res, next) {
